@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      runOnChange: true
+      id: load-data
+      author: Alex
+      changes:
+        - loadUpdateData:
+            catalogName: db
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: imageURI
+                  type: varchar(2083)
+            commentLineStartsWith: //
+            encoding: UTF-8
+            file: data/cities.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            schemaName: public
+            separator: ;
+            tableName: cities
+            primaryKey: id
+            usePreparedStatements: true

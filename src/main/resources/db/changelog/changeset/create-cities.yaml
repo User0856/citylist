@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-city
+      author: Alex
+      changes:
+        - createTable:
+            tableName: cities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: imageURI
+                  type: varchar(2083)
