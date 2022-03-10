@@ -5,6 +5,9 @@ public class APIResponse<T> {
     int recordCount;
     T response;
 
+    public APIResponse() {
+    }
+
     public int getRecordCount() {
         return recordCount;
     }
@@ -19,9 +22,6 @@ public class APIResponse<T> {
 
     public void setResponse(T response) {
         this.response = response;
-    }
-
-    public APIResponse() {
     }
 
     public APIResponse(int recordCount, T response) {
