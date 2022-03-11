@@ -11,7 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+/**
+ * Service to get or modify cities, initially for basic CRUD operations
+ */
+
+@Service("CityService")
 public class CityService {
 
     final CityRepository cityRepository;

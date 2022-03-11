@@ -20,6 +20,9 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
 }
 
 apply plugin: "org.liquibase.gradle"
