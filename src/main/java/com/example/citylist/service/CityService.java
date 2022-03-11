@@ -2,6 +2,7 @@ package com.example.citylist.service;
 
 import com.example.citylist.model.City;
 import com.example.citylist.repository.CityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -15,14 +16,11 @@ import java.util.Optional;
  * Service to get or modify cities, initially for basic CRUD operations
  */
 
-@Service("CityService")
+@Service()
 public class CityService {
 
-    final CityRepository cityRepository;
-
-    public CityService(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
-    }
+    @Autowired
+    private CityRepository cityRepository;
 
     public Page<City> findCitiesWithPagination(int offset, int pageSize){
         Page<City> cities = cityRepository.findAll(PageRequest.of(offset, pageSize));
