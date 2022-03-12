@@ -1,11 +1,13 @@
 package com.example.citylist.controller;
 
+import com.example.citylist.common.UserConstant;
 import com.example.citylist.model.User;
 import com.example.citylist.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -34,14 +37,12 @@ public class UserController {
 
     @PostMapping("/join")
     public String joinGroup(@RequestBody User user) {
-        user.setRoles(ROLE_ALLOW_VIEW);//USER
+        user.setRoles(UserConstant.DEFAULT_ROLE);//USER
         String encryptedPwd = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPwd);
         userRepository.save(user);
         return "Hi " + user.getUserName() + " welcome to group !";
     }
-    //If loggedin user is ADMIN -> ADMIN OR MODERATOR
-    //If loggedin user is MODERATOR -> MODERATOR
 
     @GetMapping("/access/{userId}/{userRole}")
     //@Secured("ROLE_ADMIN")
@@ -75,7 +76,10 @@ public class UserController {
         String roles = getLoggedInUser(principal).getRoles();
         List<String> assignRoles = Arrays.stream(roles.split(",")).collect(Collectors.toList());
         if (assignRoles.contains("ROLE_ALLOW_EDIT")) {
-            return Collections.singletonList(ROLE_ALLOW_EDIT);
+            return Arrays.stream(UserConstant.ADMIN_ACCESS).collect(Collectors.toList());
+        }
+        if (assignRoles.contains("ROLE_ALLOW_VIEW")) {
+            return Arrays.stream(UserConstant.USER_ACCESS).collect(Collectors.toList());
         }
         return Collections.emptyList();
     }

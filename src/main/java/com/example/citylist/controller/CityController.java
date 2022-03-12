@@ -1,5 +1,6 @@
 package com.example.citylist.controller;
 
+import com.example.citylist.common.UserConstant;
 import com.example.citylist.dto.CityDto;
 import com.example.citylist.model.City;
 import com.example.citylist.service.CityService;
@@ -32,6 +33,8 @@ public class CityController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @CrossOrigin(origins = "http://localhost:4200")
+   // @PreAuthorize("hasAuthority('ROLE_ALLOW_EDIT')")
     @GetMapping()
     public Page<CityDto> getCitiesPaginated(@RequestParam int offset, @RequestParam int pageSize) {
         Page<City> citiesPaginated = cityService.findCitiesWithPagination(offset, pageSize);
@@ -53,7 +56,6 @@ public class CityController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @Secured("ROLE_ALLOW_EDIT")
     @PreAuthorize("hasAuthority('ROLE_ALLOW_EDIT')")
     @PutMapping
     public CityDto updateCity(@RequestBody CityDto cityDto){

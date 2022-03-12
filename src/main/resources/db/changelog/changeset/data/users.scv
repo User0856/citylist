@@ -1,3 +1,3 @@
 id;active;user_name;password;roles
-1;TRUE;admin;$2a$10$OjbRO.mKaFpkg1UrPNOJw.hJbpVFb3eGduq0AM2MbHf1.Hdg4O0zK;ROLE_ALLOW_EDIT
+1;TRUE;admin;$2a$10$OjbRO.mKaFpkg1UrPNOJw.hJbpVFb3eGduq0AM2MbHf1.Hdg4O0zK;ROLE_ALLOW_EDIT,ROLE_ALLOW_VIEW
 2;TRUE;user;$2a$10$Tnznyk/64PUffZyGimK5b.Y8VTXszzoTkkjR4hgZQ9IuG8Ife81hG;ROLE_ALLOW_VIEW
