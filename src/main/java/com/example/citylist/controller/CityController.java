@@ -1,13 +1,11 @@
 package com.example.citylist.controller;
 
-import com.example.citylist.common.UserConstant;
 import com.example.citylist.dto.CityDto;
 import com.example.citylist.model.City;
 import com.example.citylist.service.CityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +32,6 @@ public class CityController {
     private ModelMapper modelMapper;
 
     @CrossOrigin(origins = "http://localhost:4200")
-   // @PreAuthorize("hasAuthority('ROLE_ALLOW_EDIT')")
     @GetMapping()
     public Page<CityDto> getCitiesPaginated(@RequestParam int offset, @RequestParam int pageSize) {
         Page<City> citiesPaginated = cityService.findCitiesWithPagination(offset, pageSize);

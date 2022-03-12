@@ -28,19 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.cors().and().authorizeRequests()
-                .antMatchers("/user/join")
-                .permitAll()
-                .and()
+        http.cors().and()
                 .authorizeRequests()
                 .antMatchers("/cities")
                 .authenticated()
                 .and()
-
-//                .authorizeRequests()
-//                .antMatchers("/cities")
-//                .hasAnyRole("RULE_RULE", "df")
-//                .and()
                 .httpBasic();
     }
 
@@ -48,5 +40,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

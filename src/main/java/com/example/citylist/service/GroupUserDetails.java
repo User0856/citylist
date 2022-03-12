@@ -10,6 +10,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Wrapping class for user properties
+ */
+
 public class GroupUserDetails implements UserDetails {
 
     private String userName;

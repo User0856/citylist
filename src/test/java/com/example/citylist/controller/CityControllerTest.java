@@ -12,6 +12,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -52,6 +54,7 @@ class CityControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin", roles={"ALLOW_EDIT"})
     public void getCitiesPaginatedTest_vaid() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/cities")
@@ -67,6 +70,7 @@ class CityControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin", roles={"ALLOW_EDIT"})
     public void getCityByNameTest_valid() throws Exception {
 
         Gson gson = new Gson();
@@ -82,6 +86,7 @@ class CityControllerTest {
     }
 
     @Test
+    @WithMockUser(username="admin", roles={"ALLOW_EDIT"})
     public void updateCitiesTest_valid() throws Exception {
 
         Gson gson = new Gson();

@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service to access database and retrieve users properties
+ */
+
 @Service
 public class GroupUserDetailsService implements UserDetailsService {
 
