@@ -6,6 +6,8 @@ import com.example.citylist.service.CityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +33,7 @@ public class CityController {
     private ModelMapper modelMapper;
 
     @GetMapping()
-    private Page<CityDto> getCitiesPaginated(@RequestParam int offset, @RequestParam int pageSize) {
+    public Page<CityDto> getCitiesPaginated(@RequestParam int offset, @RequestParam int pageSize) {
         Page<City> citiesPaginated = cityService.findCitiesWithPagination(offset, pageSize);
 
         Page<CityDto> citiesDtoPaginated = citiesPaginated.map(c -> convertToDto(c));
@@ -41,7 +43,7 @@ public class CityController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/search")
-    private Page<CityDto> getCityByName(@RequestBody CityDto cityDto) {
+    public Page<CityDto> getCityByName(@RequestBody CityDto cityDto) {
         City city = convertToEntity(cityDto);
         Page<City> citiesPaginated = cityService.findCityByName(city.getName());
 
@@ -51,8 +53,10 @@ public class CityController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @Secured("ROLE_ALLOW_EDIT")
+    @PreAuthorize("hasAuthority('ROLE_ALLOW_EDIT')")
     @PutMapping
-    private CityDto updateCity(@RequestBody CityDto cityDto){
+    public CityDto updateCity(@RequestBody CityDto cityDto){
         City city = convertToEntity(cityDto);
         City updatedCity = cityService.updateCity(city);
 

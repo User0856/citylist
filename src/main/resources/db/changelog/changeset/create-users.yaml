@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      runOnChange: true
+      id: create-users
+      author: Alex
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: active
+                  type: boolean
+              - column:
+                  name: user_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(200)
+              - column:
+                  name: roles
+                  type: varchar(200)

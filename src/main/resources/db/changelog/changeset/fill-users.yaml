@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      runOnChange: true
+      id: fill-users
+      author: Alex
+      changes:
+        - loadUpdateData:
+            catalogName: db
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: active
+                  type: boolean
+              - column:
+                  name: user_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(200)
+              - column:
+                  name: roles
+                  type: varchar(200)
+            commentLineStartsWith: //
+            encoding: UTF-8
+            file: data/users.scv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            schemaName: public
+            separator: ;
+            tableName: users
+            primaryKey: id
+            usePreparedStatements: true
