@@ -2,7 +2,7 @@
 
 ## To run the application
 
-Docker must be installed
+Simplest way to run the application is by using Docker.
 
 in teminal, run commands:
 
