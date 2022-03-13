@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Provides paginated lists of cities
  */
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/cities")
 public class CityController {
@@ -31,7 +32,6 @@ public class CityController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping()
     public Page<CityDto> getCitiesPaginated(@RequestParam int offset, @RequestParam int pageSize) {
         Page<City> citiesPaginated = cityService.findCitiesWithPagination(offset, pageSize);
@@ -41,7 +41,6 @@ public class CityController {
         return citiesDtoPaginated;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/search")
     public Page<CityDto> getCityByName(@RequestBody CityDto cityDto) {
         City city = convertToEntity(cityDto);
@@ -52,7 +51,6 @@ public class CityController {
         return citiesDtoPaginated;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('ROLE_ALLOW_EDIT')")
     @PutMapping
     public CityDto updateCity(@RequestBody CityDto cityDto){

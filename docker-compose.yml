@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  springboot-docker-container:
+    image: springboot-docker-container
+    container_name: springboot-docker-container
+    ports:
+      - 8080:8080
+    build:
+      context: ./
+      dockerfile: Dockerfile
