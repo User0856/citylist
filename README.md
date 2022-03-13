@@ -1,4 +1,4 @@
-# citylist
+# CityList
 
 ## To run the application
 
