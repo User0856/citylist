@@ -2,7 +2,7 @@
 
 ## To run the application
 
-Simplest way to run the application is by using Docker.
+Simplest way to run the application is by using Docker. Docker must be installed, launched and terminal must have privileges to run docker commands.
 
 in teminal, run commands:
 
