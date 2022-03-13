@@ -6,9 +6,9 @@ Simplest way to run the application is by using Docker. Docker must be installed
 
 in teminal, run commands:
 
-`docker pull user0856/restclient_citylist-web`
+`docker pull user0856/restclient-web`
 
-`docker run -p 80:80 user0856/restclient_citylist-web`
+`docker run -p 80:80 user0856/restclient-web`
 
 in new terminal tab/window, run commands:
 
