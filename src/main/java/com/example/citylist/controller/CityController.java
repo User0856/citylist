@@ -4,7 +4,6 @@ import com.example.citylist.dto.CityDto;
 import com.example.citylist.model.City;
 import com.example.citylist.service.CityService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,25 +20,25 @@ import org.springframework.web.bind.annotation.RestController;
  * Provides paginated lists of cities
  */
 
-//CrossOrigin for docker local tests and docker deployment
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/cities")
 public class CityController {
 
-    @Autowired
-    private CityService cityService;
+    private final CityService cityService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public CityController(CityService cityService, ModelMapper modelMapper) {
+        this.cityService = cityService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping()
     public Page<CityDto> getCitiesPaginated(@RequestParam int offset, @RequestParam int pageSize) {
         Page<City> citiesPaginated = cityService.findCitiesWithPagination(offset, pageSize);
 
-        Page<CityDto> citiesDtoPaginated = citiesPaginated.map(c -> convertToDto(c));
-
-        return citiesDtoPaginated;
+        return citiesPaginated.map(this::convertToDto);
     }
 
     @PostMapping("/search")
@@ -47,9 +46,7 @@ public class CityController {
         City city = convertToEntity(cityDto);
         Page<City> citiesPaginated = cityService.findCityByName(city.getName());
 
-        Page<CityDto> citiesDtoPaginated = citiesPaginated.map(c -> convertToDto(c));
-
-        return citiesDtoPaginated;
+        return citiesPaginated.map(this::convertToDto);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ALLOW_EDIT')")
@@ -62,13 +59,12 @@ public class CityController {
     }
 
     private City convertToEntity(CityDto cityDto){
-        City city = modelMapper.map(cityDto, City.class);
 
-        return city;
+        return modelMapper.map(cityDto, City.class);
     }
 
     private CityDto convertToDto(City city){
-        CityDto cityDto = modelMapper.map(city, CityDto.class);
-        return cityDto;
+
+        return modelMapper.map(city, CityDto.class);
     }
 }

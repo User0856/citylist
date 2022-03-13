@@ -9,12 +9,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USERS")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String userName;
     private String password;
-    private boolean active; //need?
+    private boolean active;
     private String roles;
 
     public User() {

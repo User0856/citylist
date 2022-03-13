@@ -10,7 +10,7 @@ import java.util.List;
  * Repository for access to "cities" table
  */
 
-@Repository()
+@Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
     List<City> findCityByName(String name);

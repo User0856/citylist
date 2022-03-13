@@ -16,15 +16,14 @@ import java.util.stream.Collectors;
 
 public class GroupUserDetails implements UserDetails {
 
-    private String userName;
-    private String password;
-    private boolean isActive;
-    private List<GrantedAuthority> authorities;
+    private final String userName;
+    private final String password;
+
+    private final List<GrantedAuthority> authorities;
 
     public GroupUserDetails(User user) {
         this.userName = user.getUserName();
         this.password = user.getPassword();
-        this.isActive = user.isActive();
         this.authorities = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());

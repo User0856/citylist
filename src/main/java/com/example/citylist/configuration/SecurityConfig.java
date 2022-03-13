@@ -16,8 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private GroupUserDetailsService groupUserDetailsService;
+    private final GroupUserDetailsService groupUserDetailsService;
+
+    public SecurityConfig(GroupUserDetailsService groupUserDetailsService) {
+        this.groupUserDetailsService = groupUserDetailsService;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

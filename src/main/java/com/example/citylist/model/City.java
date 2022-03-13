@@ -51,7 +51,6 @@ public class City {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }

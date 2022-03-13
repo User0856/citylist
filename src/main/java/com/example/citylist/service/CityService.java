@@ -2,7 +2,6 @@ package com.example.citylist.service;
 
 import com.example.citylist.model.City;
 import com.example.citylist.repository.CityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,26 +18,34 @@ import java.util.Optional;
 @Service()
 public class CityService {
 
-    @Autowired
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
+
+    public CityService(CityRepository cityRepository) {
+
+        this.cityRepository = cityRepository;
+    }
 
     public Page<City> findCitiesWithPagination(int offset, int pageSize){
-        Page<City> cities = cityRepository.findAll(PageRequest.of(offset, pageSize));
-        return cities;
+
+        return cityRepository.findAll(PageRequest.of(offset, pageSize));
     }
 
     public Page<City> findCityByName(String name){
         List<City> citiesByName = cityRepository.findCityByName(name);
-        Page<City> cities = new PageImpl<>(citiesByName);
-        return cities;
+
+        return new PageImpl<>(citiesByName);
     }
 
     @Transactional
     public City updateCity(City city){
         Optional<City> cityFound = cityRepository.findById(city.getId());
-        cityFound.get().setName(city.getName());
-        cityFound.get().setImageURI(city.getImageURI());
-        cityRepository.save(cityFound.get());
+        cityFound.ifPresent(value -> value.setName(city.getName()));
+        cityFound.ifPresent(value -> value.setImageURI(city.getImageURI()));
+
+        assert cityFound.orElse(null) != null;
+
+        cityRepository.save(cityFound.orElse(null));
+
         return city;
     }
 }
