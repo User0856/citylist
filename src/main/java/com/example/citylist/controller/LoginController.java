@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for Login page requests handling
+ */
+
+//CrossOrigin for docker local tests and docker deployment
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/")

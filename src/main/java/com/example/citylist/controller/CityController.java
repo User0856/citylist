@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Provides paginated lists of cities
  */
 
+//CrossOrigin for docker local tests and docker deployment
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/cities")
