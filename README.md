@@ -6,15 +6,15 @@ Simplest way to run the application is by using Docker. Docker must be installed
 
 in teminal, run commands:
 
-`docker pull user0856/restclient-web`
+`docker pull user0856/citylist-frontend-container`
 
-`docker run -p 80:80 user0856/restclient-web`
+`docker run -p 80:80 user0856/citylist-frontend-container`
 
 in new terminal tab/window, run commands:
 
-`docker pull user0856/cityist-backend-container`
+`docker pull user0856/citylist-backend-container`
 
-`docker run -p 8080:8080 user0856/cityist-backend-container`
+`docker run -p 8080:8080 user0856/citylist-backend-container`
 
 ## Use the application
 
