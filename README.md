@@ -40,7 +40,7 @@ login: `admin`, password: `admin` (can view, search and edit cities)
 
 Modal dialog to be replaced with a separate form with separate inputs
 
-For now you are afered an input field filled with current data so it can easily be edited
+For now you are offered an input field filled with current data so it can easily be edited
 
 <img width="443" alt="image" src="https://user-images.githubusercontent.com/42377378/158125391-b4c589b6-a467-43ec-8e3e-0d8a1879447a.png">
 
