@@ -49,10 +49,11 @@ For now you are afered an input field filled with current data so it can easily 
 **Further improvments might include:**
 
 - api versioning
-- imporved backend data validation
+- add backend data validation as per business logic
+- move @CrossOrigin to Profile configurations to run only on dev env
 - additional model data layer between service and repository layers
-- end-to-end tests
 - jwt tokens or side auth services implementation
+- end-to-end tests
 
 ## Technologies used
 
