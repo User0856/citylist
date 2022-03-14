@@ -1,9 +1,9 @@
 version: '3.5'
 
 services:
-  cityist-backend-container:
-    image: cityist-backend-container
-    container_name: scityist-backend-container
+  citylist-backend-container:
+    image: citylist-backend-container
+    container_name: scitylist-backend-container
     ports:
       - 8080:8080
     build:

@@ -1,5 +1,11 @@
 package com.example.citylist.dto;
 
+import com.example.citylist.model.City;
+
+/**
+ * DTO for @see {@link City}
+ */
+
 public class CityDto {
 
     private Long id;

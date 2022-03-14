@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -22,7 +21,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -42,13 +40,13 @@ class CityControllerTest {
 
     @BeforeEach
     public void setUp(){
-        testCity = new City(1L, "Tokyo", "MockURI");
+        testCity = new City(1, "Tokyo", "MockURI");
 
         List<City> mockCitiesList = new ArrayList<>();
         mockCitiesList.add(testCity);
         final Page<City> mockCities = new PageImpl<>(mockCitiesList);
 
-        when(cityService.findCitiesWithPagination(anyInt(), anyInt())).thenReturn(mockCities);
+        when(cityService.findCities(any())).thenReturn(mockCities);
         when(cityService.updateCity(any(City.class))).thenReturn(testCity);
         when(cityService.findCityByName(anyString())).thenReturn(mockCities);
     }
@@ -58,8 +56,8 @@ class CityControllerTest {
     public void getCitiesPaginatedTest_vaid() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/cities")
-                        .param("offset", "0")
-                        .param("pageSize", "10")
+                        .param("page", "0")
+                        .param("size", "10")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content").isArray())

@@ -1,71 +1,37 @@
 package com.example.citylist.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
     private String userName;
+
+    @Column
     private String password;
-    private boolean active;
+
+    @Column
     private String roles;
 
-    public User() {
-    }
+    @Column
+    private boolean active;
 
-    public User(int id, String userName, String password, boolean active, String roles) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.active = active;
-        this.roles = roles;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String name) {
-        this.userName = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String role) {
-        this.roles = role;
-    }
 }

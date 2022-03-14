@@ -4,14 +4,13 @@ import com.example.citylist.model.City;
 import com.example.citylist.repository.CityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,15 +19,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 class CityServiceTest {
 
-    private final Long MOCK_CITY_ID = 1L;
+    private final Integer MOCK_CITY_ID = 1;
     private final String MOCK_CITY_NAME = "Tokyo";
     private final String MOCK_CITY_URI = "MockURI";
 
@@ -49,17 +47,17 @@ class CityServiceTest {
         mockCitiesList.add(testCity);
         mockCities = new PageImpl<>(mockCitiesList);
 
-        when(cityRepository.findAll(PageRequest.of(1, 10))).thenReturn((mockCities));
+        when(cityRepository.findAll(PageRequest.of(0, 1))).thenReturn((mockCities));
         when(cityRepository.findCityByName(anyString())).thenReturn(Collections.singletonList(testCity));
-        when(cityRepository.findById(anyLong())).thenReturn(Optional.of(testCity));
+        when(cityRepository.findById(anyInt())).thenReturn(Optional.of(testCity));
         when(cityRepository.save(any(City.class))).thenReturn(testCity);
     }
 
     @Test
-    public void findCitiesWithPaginationTest(){
+    public void findCitiesTest(){
         Page<City> expected = mockCities;
 
-        Page<City> result = cityService.findCitiesWithPagination(1, 10);
+        Page<City> result = cityService.findCities(Pageable.ofSize(1));
 
         assertEquals(result, expected);
     }
