@@ -1,6 +1,6 @@
 # CityList
 
-## To run the application
+## Run the application
 
 Simplest way to run the application is by using Docker. Docker must be installed, launched and terminal must have privileges to run docker commands.
 
