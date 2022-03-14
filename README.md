@@ -32,7 +32,7 @@ login: `admin`, password: `admin` (can view, search and edit cities)
 
 **Use pagination buttons to return home after search**
 
-(**Home** button to be dded)
+(**Home** button to be added)
 
 <img width="633" alt="image" src="https://user-images.githubusercontent.com/42377378/158124902-0d705df7-710c-40b7-b93c-5d289e291e86.png">
 
